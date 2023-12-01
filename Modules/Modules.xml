@@ -1,0 +1,18 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <Script file="Quik.lua"/>
+    <Script file="ID.lua"/>
+    <Script file="Theme.lua"/>
+    <Script file="Auto.lua"/>
+    <Script file="Actionbar.lua"/>
+    <Script file="Away.lua"/>
+    <Script file="Info.lua"/>
+    <Script file="Money.lua"/>
+    <Script file="Grid.lua"/>
+    <Script file="Ammo.lua"/>
+    <Script file="Unitframe.lua"/>
+    <Script file="Copypasta.lua"/>
+    <Script file="Ilvl.lua"/>
+    <Script file="Map.lua"/>
+    
+</Ui>

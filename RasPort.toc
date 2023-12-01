@@ -1,0 +1,20 @@
+## Interface: 30402
+## Version: 1.4.5
+## Title: |TInterface\AddOns\RasPort\Media\Minimap\icon2:16:16:0:0|t |cff00FAAARastaPort|r - |cffFF8080Core|r
+## Notes:Enhance Default, All-In-One( Blizzard UI with a twist ).
+## Author: Rasta (|cff00FAAArasta0818|r)
+## SavedVariables: RasPortDB, RasPortSessionTime
+## SavedVariablesPerCharacter: RasPortCharDB
+## LoadOnDemand: 0
+## DefaultState: enabled
+## X-Category: Interface
+## X-License: MIT/X
+## X-Localizations: enUS, esMX, frFR
+## X-Website: https://github.com/Beardedrasta/RasPort
+## X-Discord: rasta0818
+
+Button.xml
+Libs\Libs.xml
+Locales\locales.xml
+Config\AceGUI-3.0-RasPortWidgets\Widget.xml
+RasPort.xml
