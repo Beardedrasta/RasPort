@@ -472,7 +472,7 @@ end
 ################################################################
 ]] --
 
-do
+--[[ do
     local function msqDefaultbar()
         if not IsAddOnLoaded("Masque") then
             return
@@ -582,7 +582,7 @@ do
     end
 
     msqDefaultbar()
-end
+end ]]
 
 --[[
 ################################################################
@@ -606,22 +606,6 @@ end
 subinit();
 
 
--- method shown
-local methodshown = function(self, data)
-	if data and data ~= false then
-		self:Show();
-	else
-		self:Hide();
-	end
-end
-
-function texture.__index:SetShown(...)
-	methodshown(self, ...);
-end
-
-function fontstring.__index:SetShown(...)
-	methodshown(self, ...);
-end
 
 
 local GetNumBattlegroundTypes = GetNumBattlegroundTypes;

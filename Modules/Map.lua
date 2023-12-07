@@ -119,6 +119,55 @@ RP:AddModule("Minimap", function()
         }
     end)
 
+
+
+
+
+
+local Runes = {
+
+    DeadlyBrew =  "Silverpine forest... LONG CHAIN Look up on wowtavern",
+    JustAFleshWound = "Reputation Rune",
+    MainGauche = "Ratchet turn ins",
+
+    DunMorogh = {
+        QuickDraw = "4 map pieces around dun morogh: lepper gnome, trolls, dark iron spies, trogs.",
+        SlaughterFromTheShadows = "On top of karanos Inn dun morogh",
+        Mutilate = "Dark iron dwarfs south of helmsbed lake dun morogh, drops blackrat note, steatlh at boat in mistypine refuge",
+    },
+    BetweentheEyes = "Forlorn cave in ironforge outside right of stairs alcove look for chest",
+    BladeDance = "Loch modan pickpocket dark iron dwarves, require lockpicking skill",
+    SaberSlash = "Defias Scout, approach in steatlh and pickpocket, Westfall",
+    
+
+    Shiv = "Duskwood, Look up the guide",
+    Envenom = "Hillsbrad , need to be atleast 20+ if not level 25 also guide lookup"
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     --------------------------------------------------------------------------------
 
     do

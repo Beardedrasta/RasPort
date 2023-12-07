@@ -148,6 +148,16 @@ RP.defaults = {
             point = "TOPRIGHT",
             x = 0,
             y = 0
+        },
+        micro = {
+            enabled = true,
+            ["Lock"] = false,
+            barAnchorPosition = {
+               point = "CENTER",
+               relativePoint = "CENTER",
+               xOfs = 0,
+               yOfs = 0,
+            }
         }
     }
 }

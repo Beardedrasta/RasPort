@@ -84,75 +84,6 @@ RP:AddModule("Theme", "UI Theme, and style change when in reduced mode", functio
         end
     end
 
-    local function skin(f, offset, x, y)
-        local t = {}
-        offset = offset or 0
-        x = x or 0
-        y = y or 0
-
-        for i = 1, 8 do
-            local section = sections[i]
-            local x = f:CreateTexture(nil, 'OVERLAY', nil, 1)
-            x:SetTexture(addonpath .. '\\Media\\Border\\border-' .. section .. '.tga')
-            t[sections[i]] = x
-        end
-
-        t.TOPLEFT:SetWidth(8)
-        t.TOPLEFT:SetHeight(8)
-        t.TOPLEFT:SetPoint('BOTTOMRIGHT', f, 'TOPLEFT', 4 + offset + x, -4 - offset + y)
-
-        t.TOPRIGHT:SetWidth(8)
-        t.TOPRIGHT:SetHeight(8)
-        t.TOPRIGHT:SetPoint('BOTTOMLEFT', f, 'TOPRIGHT', -4 - offset + x, -4 - offset + y)
-
-        t.BOTTOMLEFT:SetWidth(8)
-        t.BOTTOMLEFT:SetHeight(8)
-        t.BOTTOMLEFT:SetPoint('TOPRIGHT', f, 'BOTTOMLEFT', 4 + offset + x, 4 + offset + y)
-
-        t.BOTTOMRIGHT:SetWidth(8)
-        t.BOTTOMRIGHT:SetHeight(8)
-        t.BOTTOMRIGHT:SetPoint('TOPLEFT', f, 'BOTTOMRIGHT', -4 - offset + x, 4 + offset + y)
-
-        t.TOP:SetHeight(8)
-        t.TOP:SetPoint('TOPLEFT', t.TOPLEFT, 'TOPRIGHT')
-        t.TOP:SetPoint('TOPRIGHT', t.TOPRIGHT, 'TOPLEFT')
-
-        t.BOTTOM:SetHeight(8)
-        t.BOTTOM:SetPoint('BOTTOMLEFT', t.BOTTOMLEFT, 'BOTTOMRIGHT')
-        t.BOTTOM:SetPoint('BOTTOMRIGHT', t.BOTTOMRIGHT, 'BOTTOMLEFT')
-
-        t.LEFT:SetWidth(8)
-        t.LEFT:SetPoint('TOPLEFT', t.TOPLEFT, 'BOTTOMLEFT')
-        t.LEFT:SetPoint('BOTTOMLEFT', t.BOTTOMLEFT, 'TOPLEFT')
-
-        t.RIGHT:SetWidth(8)
-        t.RIGHT:SetPoint('TOPRIGHT', t.TOPRIGHT, 'BOTTOMRIGHT')
-        t.RIGHT:SetPoint('BOTTOMRIGHT', t.BOTTOMRIGHT, 'TOPRIGHT')
-
-        f.borderTextures = t
-        f.SetBorderColor = SetBorderColor
-        f.GetBorderColor = GetBorderColor
-    end
-
-    local function skinColor(f, r, g, b)
-        if RP["Class"] then
-            r, g, b = P.userClassColor.r, P.userClassColor.g, P.userClassColor.b
-        elseif RP["Blackout"] then
-            r, g, b = 0.15, 0.15, 0.15
-        elseif RP["Custom Color"] then
-            r, g, b = RP["CC"].red, RP["CC"].green, RP["CC"].blue
-        elseif not RP["Class"] and not RP["Blackout"] and not RP["Custom Color"] then
-            r, g, b = 1, 1, 1
-        end
-
-        local t = f.borderTextures
-        if not t then
-            return
-        end
-        for _, v in pairs(t) do
-            v:SetVertexColor(r or 1, g or 1, b or 1, 1)
-        end
-    end
 
     local function SetColorByProfile()
         if DB["Class"] then
@@ -201,15 +132,6 @@ RP:AddModule("Theme", "UI Theme, and style change when in reduced mode", functio
         end
     end
 
-    local function lock(frame)
-        frame.ClearAllPoints = function()
-        end
-        frame.SetAllPoints = function()
-        end
-        frame.SetPoint = function()
-        end
-    end
-
     local function AddRainbowColorAnimation(fontString, frame)
 
         -- Initialize rainbow variables
@@ -236,62 +158,6 @@ RP:AddModule("Theme", "UI Theme, and style change when in reduced mode", functio
         end)
 
         updaterFrame:Show()
-    end
-
-    --[[
-    ################################################################
-    #################           Buttons            #################
-    ################################################################
-    ]] --
-
-    function TM:buttons()
-        local function style(button)
-            if not button then
-                return
-            end
-            local macro = _G[button:GetName() .. "Name"]
-            if macro then
-                local font, size, outline = "Fonts\\frizqt__.TTF", 9, "OUTLINE"
-                macro:SetFont(font, size, outline)
-            end
-
-            local count = _G[button:GetName() .. 'Count']
-            if count then
-                local font, size, outline = "Fonts\\frizqt__.TTF", 14, "OUTLINE"
-                count:SetFont(font, size, outline)
-            end
-
-            skin(button, 0)
-            skinColor(button, .2, .2, .2)
-        end
-
-        for i = 1, 24 do
-            local button = _G['BonusActionButton' .. i]
-            if button then
-                -- style(button)
-            end
-        end
-
-        for i = 1, 12 do
-            for _, button in pairs({_G['ActionButton' .. i], _G['MultiBarRightButton' .. i],
-                                    _G['MultiBarLeftButton' .. i], _G['MultiBarBottomLeftButton' .. i],
-                                    _G['MultiBarBottomRightButton' .. i]}) do
-                -- style(button)
-            end
-        end
-
-        for i = 1, 10 do
-            for _, button in pairs({_G['ShapeshiftButton' .. i], _G['PetActionButton' .. i]}) do
-                -- style(button)
-            end
-        end
-
-        for i = 0, 16 do
-            for _, button in pairs({_G['BuffButton' .. i]}) do
-                -- skin(button, 0)
-                -- skinColor(button, .2, .2, .2)
-            end
-        end
     end
 
     --[[
@@ -357,7 +223,7 @@ RP:AddModule("Theme", "UI Theme, and style change when in reduced mode", functio
                            MainMenuXPBarTexture4, ReputationWatchBar.StatusBar.XPBarTexture0,
                            ReputationWatchBar.StatusBar.XPBarTexture1, ReputationWatchBar.StatusBar.XPBarTexture2,
                            ReputationWatchBar.StatusBar.XPBarTexture3}) do
-            v:Hide()
+            v:SetAlpha(0)
         end
 
         CHAT_FONT_HEIGHTS = {7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
@@ -464,7 +330,6 @@ RP:AddModule("Theme", "UI Theme, and style change when in reduced mode", functio
 
         ApplyThemeColor(blizzFrames)
         -- ApplyThemeColor(select(1, TimeManagerClockButton:GetRegions()))
-
         -- time TimeManagerClockButton
         if TimeManagerClockButton then
             local a = TimeManagerClockButton:GetRegions()
@@ -504,8 +369,8 @@ RP:AddModule("Theme", "UI Theme, and style change when in reduced mode", functio
 
         -- Skill
 
-        local a, b, c, d = SkillFrame:GetRegions()
-        ApplyVertexColorToRegions(a, b, c, d)
+        local a, b, c, d, e, f = SkillFrame:GetRegions()
+        ApplyVertexColorToRegions(a, b, c, d, e, f)
 
         -- Reputation Frame
 
@@ -518,7 +383,7 @@ RP:AddModule("Theme", "UI Theme, and style change when in reduced mode", functio
 
         -- PvPFrame
 
---[[         local _, _, c, d, e, f, g, h = PVPFrame:GetRegions()
+        --[[         local _, _, c, d, e, f, g, h = PVPFrame:GetRegions()
         for _, v in pairs({c, d, e, f, g, h}) do
             if v then
                 ApplyVertexColorToFrame(v)
@@ -541,6 +406,10 @@ RP:AddModule("Theme", "UI Theme, and style change when in reduced mode", functio
 
         local a, b, c, d, e, f = CharacterFrameTab5:GetRegions()
         ApplyVertexColorToRegions(a, b, c, d, e, f)
+
+        local a, b, c, d, _, _, g, h, i, j = HonorFrame:GetRegions()
+        ApplyVertexColorToRegions(a, b, c, d, g, h, i, j)
+
 
         -- Social Frame
         local a, b, c, d, e, f, g, _, i, j, k, l, n, o, p, q, r, _, _ = FriendsFrame:GetRegions()
@@ -703,12 +572,12 @@ RP:AddModule("Theme", "UI Theme, and style change when in reduced mode", functio
                 end
             end
 
-            local vectors = {InspectPVPFrame:GetRegions()}
-            for i = 1, 5 do
-                if vectors[i] then
-                    vectors[i]:SetVertexColor(GetTargetClassColor())
-                end
-            end
+            -- local vectors = {InspectPVPFrame:GetRegions()}
+            -- for i = 1, 5 do
+            -- if vectors[i] then
+            -- vectors[i]:SetVertexColor(GetTargetClassColor())
+            -- end
+            -- end
 
             local vectors = {InspectTalentFrame:GetRegions()}
             for i = 1, 5 do
@@ -734,12 +603,22 @@ RP:AddModule("Theme", "UI Theme, and style change when in reduced mode", functio
     --[[
     ################################################################
     #################           Addons             #################
-    ################################################################
+    ##########
+    ######################################################
     ]] --
+
+    local function IsThisClassic()
+        return WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
+    end
+
+    local function IsThisWrath()
+        return WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC
+    end
 
     function RP:ColorBlizzAddon()
 
         -- SpellBookFrame
+
         local _, a, b, c, d = SpellBookFrame:GetRegions()
         ApplyVertexColorToRegions(a, b, c, d)
 
@@ -753,8 +632,8 @@ RP:AddModule("Theme", "UI Theme, and style change when in reduced mode", functio
         end
 
         -- QuestLogFrame
-        local _, b, c, _, d = QuestLogFrame:GetRegions()
-        for _, v in pairs({b, c, d}) do
+        local _, b, c, d, e, f = QuestLogFrame:GetRegions()
+        for _, v in pairs({a, b, c, d, e, f}) do
             if v then
                 ApplyVertexColorToFrame(v)
             end
@@ -769,11 +648,18 @@ RP:AddModule("Theme", "UI Theme, and style change when in reduced mode", functio
             QuestLogFrame.Material:SetHeight(625)
             QuestLogFrame.Material:SetPoint("TOPLEFT", QuestLogDetailScrollFrame, -10, 0)
             QuestLogFrame.Material:SetVertexColor(.9, .9, .9)
-        else
+        elseif IsThisClassic() then
+            QuestLogFrame.Material = QuestLogFrame:CreateTexture(nil, "OVERLAY", nil, 7)
+            QuestLogFrame.Material:SetTexture("Interface\\AddOns\\RasPort\\Media\\Background\\QuestBG.tga")
+            QuestLogFrame.Material:SetWidth(511)
+            QuestLogFrame.Material:SetHeight(400)
+            QuestLogFrame.Material:SetPoint("TOPLEFT", QuestLogDetailScrollFrame, 0, 0)
+            QuestLogFrame.Material:SetVertexColor(.9, .9, .9)
+        elseif IsThisWrath() then
             QuestLogFrame.Material = QuestLogFrame:CreateTexture(nil, "OVERLAY", nil, 7)
             QuestLogFrame.Material:SetTexture("Interface\\AddOns\\RasPort\\Media\\Background\\QuestBG.tga")
             QuestLogFrame.Material:SetWidth(531)
-            QuestLogFrame.Material:SetHeight(511)
+            QuestLogFrame.Material:SetHeight(480)
             QuestLogFrame.Material:SetPoint("TOPLEFT", QuestLogDetailScrollFrame, -10, 0)
             QuestLogFrame.Material:SetVertexColor(.9, .9, .9)
         end
@@ -867,6 +753,45 @@ RP:AddModule("Theme", "UI Theme, and style change when in reduced mode", functio
     end
 
     function RP:BlizzFrames(addon)
+        if EngravingFrame then
+            for value = 1, 3 do
+                local frame = _G["EngravingFrameHeader" .. value]
+                if frame then
+                    local vectors = {frame:GetRegions()}
+                    for i = 1, 3 do
+                        if vectors[i] then
+                            ApplyVertexColorToFrame(vectors[i])
+                        end
+                    end
+                end
+            end
+            local a = EngravingFrameCollectedFrame:GetRegions()
+            for _, v in pairs({a}) do
+                if v then
+                    v:SetVertexColor(P.userClassColor.r, P.userClassColor.g, P.userClassColor.b)
+                end
+            end
+
+            local _, _, c, d, e = EngravingFrameSearchBox:GetRegions()
+            for _, v in pairs({c, d, e}) do
+                if v then
+                    ApplyVertexColorToFrame(v)
+                end
+            end
+
+            local a, b, c, _, e = EngravingFrameFilterDropDown:GetRegions()
+            for _, v in pairs({a, b, c, e}) do
+                if v then
+                    ApplyVertexColorToFrame(v)
+                end
+            end
+            local a, b, c, d, e, f, g, h = EngravingFrame.Border.NineSlice:GetRegions()
+            for _, v in pairs({a, b, c, d, e, f, g, h}) do
+                if v then
+                    ApplyVertexColorToFrame(v)
+                end
+            end
+        end
         -- glyphs
         if addon == "Blizzard_GlyphUI" then
             if GlyphFrame then
@@ -1094,6 +1019,13 @@ RP:AddModule("Theme", "UI Theme, and style change when in reduced mode", functio
                         ApplyVertexColorToFrame(v)
                     end
                 end
+            end
+        end
+
+        if addon == "Blizzard_CharacterUI" then
+            if EngravingFrame then
+                local a, b, c, d, e = EngravingFrame:GetRegions()
+                ApplyVertexColorToRegions(a, b, c, d, e)
             end
         end
     end
@@ -1402,7 +1334,7 @@ RP:AddModule("Theme", "UI Theme, and style change when in reduced mode", functio
 
     RP:RegisterForEvent("PLAYER_LOGIN", function()
         RP.options.args.Options.args.Theme = options
-        TM:buttons()
+        --TM:buttons()
         ApplyMap()
         RP:Copy()
 

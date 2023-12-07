@@ -14,6 +14,7 @@
 ###########################################################################
 ]]--
 local RP = RasPort
+local _, _, U, _ = RP:Unpack() -- m, p, u, c
 RP:AddModule("Ammo", "A tidy little QOL ammunition tracker", function(L)
     if RP:IsDisabled("Ammo") then return end
 
@@ -116,7 +117,7 @@ RP:AddModule("Ammo", "A tidy little QOL ammunition tracker", function(L)
         if not frame then
             frame = CreateFrame("Frame", "AmmoAmount", RasPortGoldAddonFrame,"BackdropTemplate")
             frame:SetSize(105, 50)
-            frame:SetPoint("BOTTOM",RasPortGoldAddonFrame, "TOP", -22, -5)
+            frame:SetPoint("BOTTOM",RasPortGoldAddonFrame, "TOP", -15, -5)
             frame:SetFrameStrata("HIGH")
             frame:SetBackdrop({
                 bgFile = "Interface\\HELPFRAME\\DarkSandstone-Tile", "REPEAT", "REPEAT",
@@ -140,7 +141,7 @@ RP:AddModule("Ammo", "A tidy little QOL ammunition tracker", function(L)
             ammoStatusBar = CreateFrame("StatusBar", "AmmoAmountStatusBar", frame)
             ammoStatusBar:SetSize(100, 20)
             ammoStatusBar:SetPoint("CENTER", 10, -8)
-            ammoStatusBar:SetStatusBarTexture(RP.LSM:Fetch("statusbar", "Default"))
+            ammoStatusBar:SetStatusBarTexture(U.LSM:Fetch("statusbar", "Default"))
 
             ammoIcon = frame:CreateTexture(nil, "OVERLAY")
             ammoIcon:SetSize(20, 20)

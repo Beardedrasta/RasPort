@@ -22,7 +22,7 @@
 <Include file="AceGUI-3.0-SharedMediaWidgets\widget.xml"/>
 <Script file="LibQTip-1.0\LibQTip-1.0.lua" />
 <Script file="LibItemSearch-1.0\LibItemSearch-1.0.lua" />
-<Script file="LibBars-1.0\LibBars-1.0.lua" />
+<!-- <Script file="LibBars-1.0\LibBars-1.0.lua" /> -->
 <Include file="LibDropDown\embed.xml"/>
 <Include file='LibWindow-1.1\Libwindow.lua'/>
 </Ui>

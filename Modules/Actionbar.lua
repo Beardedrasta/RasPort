@@ -284,7 +284,7 @@ RP:AddModule("Actionbar", "Action bar modifications within blizzard standard", f
 
         -- resize actionbar
         for id, frame in pairs(resizes) do
-            frame:SetWidth(678)
+            frame:SetWidth(500)
         end
 
         --[[             -- move castbar ontop of other bars
@@ -479,7 +479,7 @@ RP:AddModule("Actionbar", "Action bar modifications within blizzard standard", f
             end
         end ]]
 
-            if UnitLevel("player") < SHOW_SPEC_LEVEL then
+            if UnitLevel("player") < SHOW_SPEC_LEVEL and RP:IsDisabled("Micro") then
                 CharacterMicroButton:ClearAllPoints()
                 CharacterMicroButton:SetPoint("BOTTOMRIGHT", MicroButtonAndBagsBar, -230, 5.5)
 
@@ -493,7 +493,7 @@ RP:AddModule("Actionbar", "Action bar modifications within blizzard standard", f
                     self:SetPoint("BOTTOMRIGHT", MicroButtonAndBagsBar, -230, 5.5)
                     moving = nil
                 end)
-            else
+            elseif RP:IsDisabled("Micro") then
                 CharacterMicroButton:ClearAllPoints()
                 CharacterMicroButton:SetPoint("BOTTOMRIGHT", MicroButtonAndBagsBar, -250, 5.5)
 
@@ -508,6 +508,8 @@ RP:AddModule("Actionbar", "Action bar modifications within blizzard standard", f
                     moving = nil
                 end)
             end
+
+            if RP:IsDisabled("Micro") then
 
             rpMicro:SetHeight(CharacterMicroButton:GetHeight())
             rpMicro:SetPoint("TOPLEFT", CharacterMicroButton, -7, -13)
@@ -545,6 +547,7 @@ RP:AddModule("Actionbar", "Action bar modifications within blizzard standard", f
             rpMicro.border:SetPoint("TOPLEFT", rpMicro, "BOTTOMRIGHT", -4, 4)
             rpMicro.border:SetPoint("BOTTOMRIGHT", rpMicro, "TOPLEFT", 4, -4)
             rpMicro.border:SetBackdropBorderColor(r, g, b, 1)
+            end
 
             -- Bag buttons
             MainMenuBarBackpackButton:ClearAllPoints()
@@ -657,7 +660,7 @@ RP:AddModule("Actionbar", "Action bar modifications within blizzard standard", f
             -- action bar bg
             xpbg:SetFrameStrata("MEDIUM")
             xpbg:SetPoint("CENTER", MainMenuExpBar, 0, 0)
-            xpbg:SetSize(687, 25)
+            xpbg:SetSize(MainMenuExpBar:GetWidth()/2, 25)
             xpbg.bd = CreateFrame("Frame", nil, xpbg, "BackdropTemplate")
             xpbg.bd:SetBackdrop({
                 bgFile = "Interface\\AddOns\\RasPort\\Media\\Background\\UI-Background-Rock.blp",
